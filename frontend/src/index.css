@@ -1,0 +1,203 @@
+/* =============================================
+   Brokenomics — Global Styles
+   Dark mode only. Base: #0F0F14
+   Fonts: Bebas Neue (headlines) + Space Grotesk (body)
+   ============================================= */
+
+@import "tailwindcss";
+
+/* ── CSS Custom Properties ── */
+:root {
+  --font-display: 'Bebas Neue', sans-serif;
+  --font-body: 'Space Grotesk', sans-serif;
+
+  --bg-base: #0F0F14;
+  --bg-card: rgba(255, 255, 255, 0.06);
+  --border-glass: rgba(255, 255, 255, 0.10);
+
+  /* Topic accent palette */
+  --mutual-funds-bg: #F5F0E8;
+  --mutual-funds-accent: #C0392B;
+
+  --stocks-bg: #EDF2F7;
+  --stocks-accent: #1A56DB;
+
+  --banking-bg: #F0FFF4;
+  --banking-accent: #276749;
+
+  --loans-bg: #FFF8F0;
+  --loans-accent: #C05621;
+
+  --taxes-bg: #FFFFF0;
+  --taxes-accent: #6B21A8;
+
+  --investing-bg: #FFF0F6;
+  --investing-accent: #111827;
+}
+
+/* ── Reset & Base ── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-base);
+  color: #F3F4F6;
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+#root {
+  min-height: 100svh;
+  width: 100%;
+}
+
+/* ── Typography helpers ── */
+.font-display {
+  font-family: var(--font-display);
+  letter-spacing: 0.02em;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+  letter-spacing: 0.02em;
+  line-height: 1.05;
+  color: #FFFFFF;
+}
+
+/* ── Glassmorphism card base ── */
+.glass-card {
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+}
+
+/* ── Scrollbar styling ── */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+/* ── Embla Carousel base ── */
+.embla {
+  overflow: hidden;
+  width: 100%;
+}
+.embla__container {
+  display: flex;
+  gap: 16px;
+  padding: 24px 8px 32px;
+}
+.embla__slide {
+  flex: 0 0 auto;
+  min-width: 0;
+}
+
+/* ── Jargon tooltip underline ── */
+.jargon-word {
+  border-bottom: 1px dotted rgba(255, 255, 255, 0.5);
+  cursor: help;
+  position: relative;
+}
+
+/* ── Progress bar base ── */
+.progress-bar-track {
+  height: 3px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.12);
+  overflow: hidden;
+}
+.progress-bar-fill {
+  height: 100%;
+  border-radius: 9999px;
+  transition: width 0.6s ease;
+}
+
+/* ── Pill button ── */
+.pill-btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 18px;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.20);
+  background: rgba(255, 255, 255, 0.07);
+  color: #F3F4F6;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+.pill-btn:hover {
+  background: rgba(255, 255, 255, 0.14);
+  border-color: rgba(255, 255, 255, 0.35);
+}
+.pill-btn.selected {
+  background: #FFFFFF;
+  color: #0F0F14;
+  border-color: #FFFFFF;
+}
+
+/* ── Chat message styles ── */
+.chat-bubble-user {
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 18px 18px 4px 18px;
+  padding: 10px 14px;
+  font-size: 14px;
+  color: #F3F4F6;
+  max-width: 85%;
+  align-self: flex-end;
+  word-break: break-word;
+}
+.chat-bubble-assistant {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  border-radius: 18px 18px 18px 4px;
+  padding: 10px 14px;
+  font-size: 14px;
+  color: #E5E7EB;
+  max-width: 90%;
+  align-self: flex-start;
+  word-break: break-word;
+}
+
+/* ── Journey flowchart line ── */
+.journey-connector {
+  width: 2px;
+  min-height: 40px;
+  background: linear-gradient(to bottom, rgba(255,255,255,0.2), rgba(255,255,255,0.05));
+  margin-left: 19px;
+}
+
+/* ── Smooth transitions for overlays ── */
+.overlay-enter {
+  animation: fadeIn 0.3s ease forwards;
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
