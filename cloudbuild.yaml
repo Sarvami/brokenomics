@@ -1,0 +1,45 @@
+substitutions:
+  _REGION: us-central1
+  _SERVICE: genz-finance-backend
+  _AR_REPO: genz-finance
+
+steps:
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - build
+      - -t
+      - '${_REGION}-docker.pkg.dev/$PROJECT_ID/${_AR_REPO}/${_SERVICE}:${SHORT_SHA}'
+      - .
+
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - push
+      - '${_REGION}-docker.pkg.dev/$PROJECT_ID/${_AR_REPO}/${_SERVICE}:${SHORT_SHA}'
+
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: gcloud
+    args:
+      - run
+      - deploy
+      - '${_SERVICE}'
+      - --image
+      - '${_REGION}-docker.pkg.dev/$PROJECT_ID/${_AR_REPO}/${_SERVICE}:${SHORT_SHA}'
+      - --region
+      - '${_REGION}'
+      - --platform
+      - managed
+      - --allow-unauthenticated
+      - --max-instances
+      - '3'
+      - --set-secrets
+      - SECRET_KEY=GENZ_SECRET_KEY:latest
+      - --set-secrets
+      - MONGODB_URL=GENZ_MONGODB_URL:latest
+      - --set-secrets
+      - ELASTIC_API_KEY=GENZ_ELASTIC_API_KEY:latest
+      - --set-env-vars
+      - APP_ENV=production,DEBUG=false,GOOGLE_CLOUD_PROJECT=$PROJECT_ID,GOOGLE_CLOUD_LOCATION=${_REGION}
+
+images:
+  - '${_REGION}-docker.pkg.dev/$PROJECT_ID/${_AR_REPO}/${_SERVICE}:${SHORT_SHA}'
+
