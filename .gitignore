@@ -1,0 +1,17 @@
+.DS_Store
+
+# env
+.env
+
+# python
+__pycache__/
+*.py[cod]
+
+# virtualenv
+.venv/
+
+# pytest
+.pytest_cache/
+
+# editor
+.vscode/
