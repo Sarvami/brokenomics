@@ -72,7 +72,7 @@ export const TOPIC_DATA = [
     emoji: '💳',
     teaser: 'EMIs sound fine until they don\'t',
     description: 'Debt is not always bad — but bad debt is always debt. Know the difference before you sign anything.',
-    bgColor: '#FFF8F0',
+    bgColor: '#F0FDFA',
     accentColor: '#0D9488',
     progress: 0,
     subTopics: [
