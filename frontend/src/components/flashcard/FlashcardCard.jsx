@@ -17,7 +17,7 @@ const CARD_THEME = {
   'mutual-funds':   { cardBg: '#1A0505', borderColor: '#C0392B', backBg: '#C0392B' },
   'stocks-trading': { cardBg: '#05051A', borderColor: '#1A56DB', backBg: '#1A56DB' },
   'banking':        { cardBg: '#051A05', borderColor: '#27AE60', backBg: '#27AE60' },
-  'loans-credit':   { cardBg: '#1A0A05', borderColor: '#C05621', backBg: '#C05621' },
+  'loans-credit':   { cardBg: '#051A1A', borderColor: '#0D9488', backBg: '#0D9488' },
   'taxes-saving':   { cardBg: '#0A051A', borderColor: '#6B21A8', backBg: '#6B21A8' },
   'investing-101':  { cardBg: '#1A0505', borderColor: '#E74C3C', backBg: '#E74C3C' },
 };

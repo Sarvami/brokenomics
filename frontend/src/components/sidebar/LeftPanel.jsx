@@ -52,6 +52,80 @@ function SavedItem({ item }) {
   );
 }
 
+function NavItem({ icon: Icon, label, onClick, locked, isAuthenticated }) {
+  const [hovered, setHovered] = useState(false);
+
+  return (
+    <button
+      onClick={onClick}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      style={{
+        display: 'flex',
+        alignItems: 'center',
+        gap: '14px',
+        width: '100%',
+        padding: '14px 16px',
+        borderRadius: '12px',
+        background: hovered ? 'rgba(108,99,255,0.10)' : 'transparent',
+        border: 'none',
+        cursor: 'pointer',
+        transition: 'background 0.15s',
+        textAlign: 'left',
+      }}
+    >
+      <div
+        style={{
+          width: '36px',
+          height: '36px',
+          borderRadius: '10px',
+          background: hovered
+            ? `rgba(108,99,255,0.20)`
+            : 'rgba(255,255,255,0.06)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          flexShrink: 0,
+          transition: 'background 0.15s',
+        }}
+      >
+        <Icon
+          size={18}
+          color={hovered ? '#A78BFA' : '#6B7280'}
+          weight={hovered ? 'fill' : 'regular'}
+        />
+      </div>
+      <span
+        style={{
+          fontFamily: "'Space Grotesk', sans-serif",
+          fontSize: '14px',
+          fontWeight: 500,
+          color: hovered ? '#F3F4F6' : '#9CA3AF',
+          flex: 1,
+          transition: 'color 0.15s',
+        }}
+      >
+        {label}
+      </span>
+      {locked && !isAuthenticated && (
+        <span
+          style={{
+            fontFamily: "'Space Grotesk', sans-serif",
+            fontSize: '10px',
+            color: '#4B5563',
+            background: 'rgba(255,255,255,0.05)',
+            padding: '2px 7px',
+            borderRadius: '20px',
+            border: '1px solid rgba(255,255,255,0.08)',
+          }}
+        >
+          sign in
+        </span>
+      )}
+    </button>
+  );
+}
+
 export default function LeftPanel({ onNavigate, lastVisitedTopic }) {
   const [open, setOpen] = useState(false);
   const [activeSection, setActiveSection] = useState(null);
@@ -63,14 +137,26 @@ export default function LeftPanel({ onNavigate, lastVisitedTopic }) {
 
   // Fetch saved items when that section is active and user is authenticated
   useEffect(() => {
+    let active = true;
     if (activeSection === 'saved' && isAuthenticated && !isGuest) {
-      setSavedLoading(true);
+      Promise.resolve().then(() => {
+        if (active) setSavedLoading(true);
+      });
       profileAPI
         .getSavedItems()
-        .then((data) => setSavedItems(data.items || data || []))
-        .catch(() => setSavedItems([]))
-        .finally(() => setSavedLoading(false));
+        .then((data) => {
+          if (active) setSavedItems(data.items || data || []);
+        })
+        .catch(() => {
+          if (active) setSavedItems([]);
+        })
+        .finally(() => {
+          if (active) setSavedLoading(false);
+        });
     }
+    return () => {
+      active = false;
+    };
   }, [activeSection, isAuthenticated, isGuest]);
 
   const showToast = (msg) => {
@@ -129,80 +215,7 @@ export default function LeftPanel({ onNavigate, lastVisitedTopic }) {
     setActiveSection('profile');
   };
 
-  // Nav item component
-  const NavItem = ({ icon: Icon, label, onClick, accent, locked }) => {
-    const [hovered, setHovered] = useState(false);
 
-    return (
-      <button
-        onClick={onClick}
-        onMouseEnter={() => setHovered(true)}
-        onMouseLeave={() => setHovered(false)}
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: '14px',
-          width: '100%',
-          padding: '14px 16px',
-          borderRadius: '12px',
-          background: hovered ? 'rgba(108,99,255,0.10)' : 'transparent',
-          border: 'none',
-          cursor: 'pointer',
-          transition: 'background 0.15s',
-          textAlign: 'left',
-        }}
-      >
-        <div
-          style={{
-            width: '36px',
-            height: '36px',
-            borderRadius: '10px',
-            background: hovered
-              ? `rgba(108,99,255,0.20)`
-              : 'rgba(255,255,255,0.06)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            flexShrink: 0,
-            transition: 'background 0.15s',
-          }}
-        >
-          <Icon
-            size={18}
-            color={hovered ? '#A78BFA' : '#6B7280'}
-            weight={hovered ? 'fill' : 'regular'}
-          />
-        </div>
-        <span
-          style={{
-            fontFamily: "'Space Grotesk', sans-serif",
-            fontSize: '14px',
-            fontWeight: 500,
-            color: hovered ? '#F3F4F6' : '#9CA3AF',
-            flex: 1,
-            transition: 'color 0.15s',
-          }}
-        >
-          {label}
-        </span>
-        {locked && !isAuthenticated && (
-          <span
-            style={{
-              fontFamily: "'Space Grotesk', sans-serif",
-              fontSize: '10px',
-              color: '#4B5563',
-              background: 'rgba(255,255,255,0.05)',
-              padding: '2px 7px',
-              borderRadius: '20px',
-              border: '1px solid rgba(255,255,255,0.08)',
-            }}
-          >
-            sign in
-          </span>
-        )}
-      </button>
-    );
-  };
 
   return (
     <>
@@ -450,11 +463,11 @@ export default function LeftPanel({ onNavigate, lastVisitedTopic }) {
                 {/* Default nav list */}
                 {!activeSection && (
                   <nav style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
-                    <NavItem icon={GraduationCap} label="🎓  Learn" onClick={handleLearn} />
-                    <NavItem icon={Question}      label="📝  Take a Quiz" onClick={handleQuiz} />
-                    <NavItem icon={ChatCircleText} label="💬  My Chats" onClick={handleChats} locked />
-                    <NavItem icon={BookmarkSimple} label="🔖  Saved" onClick={handleSaved} locked />
-                    <NavItem icon={User}           label="👤  Profile" onClick={handleProfile} locked />
+                    <NavItem icon={GraduationCap} label="🎓  Learn" onClick={handleLearn} isAuthenticated={isAuthenticated} />
+                    <NavItem icon={Question}      label="📝  Take a Quiz" onClick={handleQuiz} isAuthenticated={isAuthenticated} />
+                    <NavItem icon={ChatCircleText} label="💬  My Chats" onClick={handleChats} locked isAuthenticated={isAuthenticated} />
+                    <NavItem icon={BookmarkSimple} label="🔖  Saved" onClick={handleSaved} locked isAuthenticated={isAuthenticated} />
+                    <NavItem icon={User}           label="👤  Profile" onClick={handleProfile} locked isAuthenticated={isAuthenticated} />
                   </nav>
                 )}
 

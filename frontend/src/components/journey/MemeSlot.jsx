@@ -5,7 +5,7 @@
 
 import { Image } from 'phosphor-react';
 
-export default function MemeSlot({ label = 'Meme loading...', context = '', accentColor = 'rgba(255,255,255,0.20)' }) {
+export default function MemeSlot({ label = 'Meme loading...', accentColor = 'rgba(255,255,255,0.20)' }) {
   return (
     <div
       style={{

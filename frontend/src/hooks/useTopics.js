@@ -73,7 +73,7 @@ export const TOPIC_DATA = [
     teaser: 'EMIs sound fine until they don\'t',
     description: 'Debt is not always bad — but bad debt is always debt. Know the difference before you sign anything.',
     bgColor: '#FFF8F0',
-    accentColor: '#C05621',
+    accentColor: '#0D9488',
     progress: 0,
     subTopics: [
       { id: 'credit-score', title: 'CIBIL Score — Your Financial Identity', description: '750+ and lenders will chase you. Below 650? Good luck getting approved.' },

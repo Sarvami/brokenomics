@@ -28,10 +28,10 @@ function hasCompletedQuiz(topicId) {
   try { return !!localStorage.getItem(quizKey(topicId)); } catch { return false; }
 }
 function saveQuizAnswers(topicId, answers) {
-  try { localStorage.setItem(quizKey(topicId), JSON.stringify(answers)); } catch {}
+  try { localStorage.setItem(quizKey(topicId), JSON.stringify(answers)); } catch { /* ignore */ }
 }
 function clearQuizAnswers(topicId) {
-  try { localStorage.removeItem(quizKey(topicId)); } catch {}
+  try { localStorage.removeItem(quizKey(topicId)); } catch { /* ignore */ }
 }
 
 export default function Home() {

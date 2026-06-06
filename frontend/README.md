@@ -120,7 +120,7 @@ Journey View
 | Mutual Funds | `#1A0505` | `#C0392B` |
 | Stocks & Trading | `#05051A` | `#1A56DB` |
 | Banking | `#051A05` | `#27AE60` |
-| Loans & Credit | `#1A0A05` | `#C05621` |
+| Loans & Credit | `#051A1A` | `#0D9488` |
 | Taxes & Saving | `#0A051A` | `#6B21A8` |
 | Investing 101 | `#1A0505` | `#E74C3C` |
 

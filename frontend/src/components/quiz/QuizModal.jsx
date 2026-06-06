@@ -45,10 +45,10 @@ const FALLBACK_QUESTIONS = [
 ];
 
 export default function QuizModal({ topic, onClose, onComplete }) {
-  const [questions, setQuestions] = useState([]);
+  const [questions, setQuestions] = useState(topic?.id ? [] : FALLBACK_QUESTIONS);
   const [currentQ, setCurrentQ] = useState(0);
   const [answers, setAnswers] = useState({});
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(!!topic?.id);
   const [submitting, setSubmitting] = useState(false);
   const [done, setDone] = useState(false);
   // track hover per option
@@ -68,7 +68,6 @@ export default function QuizModal({ topic, onClose, onComplete }) {
       }
     };
     if (topic?.id) fetch();
-    else { setQuestions(FALLBACK_QUESTIONS); setLoading(false); }
   }, [topic?.id]);
 
   const question = questions[currentQ];

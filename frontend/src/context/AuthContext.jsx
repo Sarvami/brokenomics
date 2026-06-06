@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 /**
  * AuthContext — manages JWT token in memory, user state,
  * and auth modal visibility.

@@ -3,7 +3,7 @@
  * and communication with the chat API.
  */
 
-import { useState, useCallback, useRef } from 'react';
+import { useState, useCallback } from 'react';
 import { chatAPI } from '../lib/api';
 
 export default function useChat(topicId) {
@@ -11,7 +11,6 @@ export default function useChat(topicId) {
   const [loading, setLoading] = useState(false);
   const [historyLoading, setHistoryLoading] = useState(false);
   const [error, setError] = useState(null);
-  const abortRef = useRef(null);
 
   /**
    * Load chat history for the topic

@@ -21,7 +21,7 @@ const TOPIC_SHADES = {
   'mutual-funds':   { shades: ['#1A0505', '#2A0808', '#3A0A0A'], hover: ['#2A0808', '#3A0A0A', '#4A0D0D'], accent: '#C0392B' },
   'stocks-trading': { shades: ['#05051A', '#0A0A2A', '#0D0D3A'], hover: ['#0A0A2A', '#0D0D3A', '#121250'], accent: '#1A56DB' },
   'banking':        { shades: ['#051A05', '#0A2A0A', '#0D3A0D'], hover: ['#0A2A0A', '#0D3A0D', '#0F4A0F'], accent: '#27AE60' },
-  'loans-credit':   { shades: ['#1A0A05', '#2A1008', '#3A150A'], hover: ['#2A1008', '#3A150A', '#4A1A0D'], accent: '#C05621' },
+  'loans-credit':   { shades: ['#051A18', '#071F1E', '#0A2A28'], hover: ['#071F1E', '#0A2A28', '#0D3532'], accent: '#0D9488' },
   'taxes-saving':   { shades: ['#0A051A', '#14082A', '#1A0A3A'], hover: ['#14082A', '#1A0A3A', '#22104A'], accent: '#6B21A8' },
   'investing-101':  { shades: ['#1A0505', '#2A0808', '#350B0B'], hover: ['#2A0808', '#350B0B', '#440D0D'], accent: '#E74C3C' },
 };
@@ -60,8 +60,6 @@ function BentoCard({ subTopic, bg, hoverBg, accent, colSpan, rowSpan, delay, onC
         gridRow: `span ${rowSpan}`,
         // Solid background — switches on hover via state
         backgroundColor: hovered ? hoverBg : bg,
-        // Top accent border line
-        borderTop: `3px solid ${accent}`,
         // Hover glow
         boxShadow: hovered
           ? `0 0 20px ${accent}33, 0 4px 16px rgba(0,0,0,0.50)`

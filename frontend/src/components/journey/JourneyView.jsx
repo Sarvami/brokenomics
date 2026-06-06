@@ -42,7 +42,6 @@ function ActionCard({ title, subtitle, href, onClick, accentColor }) {
   const cardStyle = {
     flex: '1 1 180px',
     minWidth: '160px',
-    backgroundColor: '#0F0F14',
     borderTop: `3px solid ${accentColor}`,
     borderLeft: '1px solid rgba(255,255,255,0.08)',
     borderRight: '1px solid rgba(255,255,255,0.08)',
@@ -83,7 +82,7 @@ export default function JourneyView({ topic, subTopic }) {
   const navigate = useNavigate();
   const [journeySteps, setJourneySteps] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [currentStep, setCurrentStep] = useState(0);
+  const [currentStep] = useState(0);
   const [jargonTerms, setJargonTerms] = useState([]);
   const [showCompletion, setShowCompletion] = useState(false);
   const completionRef = useRef(null);
@@ -105,7 +104,7 @@ export default function JourneyView({ topic, subTopic }) {
       }
     };
     if (topic?.id) fetch();
-  }, [topic?.id, subTopic?.id]);
+  }, [topic, subTopic]);
 
   // Show completion section once all steps are visible (after a short delay)
   useEffect(() => {
