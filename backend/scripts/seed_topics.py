@@ -19,10 +19,10 @@ from app.db import collections
 
 TOPICS: list[dict[str, Any]] = [
     {
-        "id": "mutual_funds",
+        "id": "mutual-funds",
         "title": "Mutual Funds",
         "description": "SIPs, ELSS, index funds — the beginner-friendly investing lane.",
-        "icon_name": "mutual_funds",
+        "icon_name": "mutual-funds",
         "difficulty_tags": ["beginner", "long_term"],
         "sample_questions": [
             "What is a SIP?",
@@ -32,18 +32,19 @@ TOPICS: list[dict[str, Any]] = [
             "Index fund vs active fund?",
         ],
         "sub_topics": [
-            {"id": "sip_basics", "title": "SIP basics", "description": "How SIP works and why it’s popular."},
-            {"id": "lumpsum_vs_sip", "title": "Lumpsum vs SIP", "description": "When each makes sense."},
-            {"id": "nav_basics", "title": "NAV", "description": "The price of a mutual fund unit."},
-            {"id": "elss_80c", "title": "ELSS & 80C", "description": "Tax-saving funds in India."},
-            {"id": "index_funds", "title": "Index funds", "description": "Low-cost market-tracking funds."},
+            {"id": "what-are-mf", "title": "What Even Is a Mutual Fund?", "description": "If SIP is your parents' answer to everything, time to actually understand why."},
+            {"id": "types-of-mf", "title": "Equity vs Debt vs Hybrid", "description": "Not all mutual funds slap the same. Know what you're buying."},
+            {"id": "sip-basics", "title": "SIP 101", "description": "Systematic Investment Plan — the 'set it and forget it' of investing."},
+            {"id": "nav-explained", "title": "NAV Explained", "description": "It's not your network access value. It's what your fund is actually worth."},
+            {"id": "direct-vs-regular", "title": "Direct vs Regular Plans", "description": "One of them is literally stealing from you. We're not joking."},
+            {"id": "elss", "title": "ELSS — Save Tax & Build Wealth", "description": "Two birds, one stone. Save on taxes and build wealth at the same time."},
         ],
     },
     {
-        "id": "stocks_trading",
+        "id": "stocks-trading",
         "title": "Stocks & Trading",
         "description": "Shares, NSE/BSE, and how prices move (without the hype).",
-        "icon_name": "stocks",
+        "icon_name": "stocks-trading",
         "difficulty_tags": ["beginner", "risk"],
         "sample_questions": [
             "What is a share?",
@@ -53,11 +54,12 @@ TOPICS: list[dict[str, Any]] = [
             "What is a limit order?",
         ],
         "sub_topics": [
-            {"id": "shares_basics", "title": "Shares 101", "description": "Ownership, voting, profits."},
-            {"id": "nse_bse", "title": "NSE vs BSE", "description": "Indian stock exchanges."},
-            {"id": "price_basics", "title": "Price movement", "description": "Demand, news, expectations."},
-            {"id": "orders", "title": "Orders", "description": "Market vs limit orders."},
-            {"id": "risk_management", "title": "Risk basics", "description": "Volatility and position sizing."},
+            {"id": "stock-basics", "title": "What Is a Stock, Actually?", "description": "You own a tiny piece of Infosys. No, really. That's what a stock is."},
+            {"id": "nse-bse", "title": "NSE vs BSE — What's the Diff?", "description": "India has two stock exchanges. Both matter. Here's why."},
+            {"id": "demat-trading", "title": "Demat & Trading Accounts", "description": "Before you buy your first share, you need these two things."},
+            {"id": "fundamental-analysis", "title": "Reading a Company's Report Card", "description": "P/E ratio, EPS, balance sheet — less scary than they sound."},
+            {"id": "technical-analysis", "title": "Charts & Candlesticks", "description": "The art of reading stock charts without losing your mind."},
+            {"id": "indices", "title": "Sensex & Nifty Decoded", "description": "Why do people freak out when Sensex drops 500 points?"},
         ],
     },
     {
@@ -74,18 +76,19 @@ TOPICS: list[dict[str, Any]] = [
             "What is KYC?",
         ],
         "sub_topics": [
-            {"id": "savings_interest", "title": "Savings interest", "description": "How banks pay interest."},
-            {"id": "fd_basics", "title": "Fixed deposits", "description": "Returns, lock-in, tax."},
-            {"id": "rd_basics", "title": "Recurring deposits", "description": "Monthly saving discipline."},
-            {"id": "zero_balance", "title": "Zero balance", "description": "Accounts with no minimum balance."},
-            {"id": "kyc", "title": "KYC", "description": "Why verification is required in India."},
+            {"id": "savings-vs-current", "title": "Savings vs Current Account", "description": "One earns interest, one doesn't. Guess which one your business needs."},
+            {"id": "fd-rd", "title": "FDs & RDs — Still Worth It?", "description": "Your grandma swears by FDs. Is she wrong, or are you missing out?"},
+            {"id": "upi-neft-rtgs", "title": "UPI, NEFT, RTGS, IMPS", "description": "We use UPI daily but most of us have no clue how it actually works."},
+            {"id": "credit-score-banking", "title": "How Banks See Your Credit Score", "description": "That three-digit number decides if you get a loan or a no."},
+            {"id": "digital-banking", "title": "Neo Banks & Digital Banking", "description": "Fi, Jupiter, Niyo — are these actually better than HDFC?"},
+            {"id": "rbi-basics", "title": "What Does RBI Actually Do?", "description": "The boss of all Indian banks. More powerful than your CA."},
         ],
     },
     {
-        "id": "loans_credit",
+        "id": "loans-credit",
         "title": "Loans & Credit",
         "description": "EMIs, credit scores, and how debt can help or hurt.",
-        "icon_name": "loans",
+        "icon_name": "loans-credit",
         "difficulty_tags": ["beginner", "important"],
         "sample_questions": [
             "What is EMI?",
@@ -95,18 +98,19 @@ TOPICS: list[dict[str, Any]] = [
             "How to improve my credit score?",
         ],
         "sub_topics": [
-            {"id": "emi_basics", "title": "EMI", "description": "How monthly repayments work."},
-            {"id": "credit_score", "title": "Credit score", "description": "CIBIL basics."},
-            {"id": "loan_types", "title": "Loan types", "description": "Secured vs unsecured loans."},
-            {"id": "interest_rates", "title": "Interest rates", "description": "Fixed vs floating."},
-            {"id": "credit_habits", "title": "Good credit habits", "description": "Paying on time, utilisation."},
+            {"id": "credit-score", "title": "CIBIL Score — Your Financial Identity", "description": "750+ and lenders will chase you. Below 650? Good luck getting approved."},
+            {"id": "credit-cards", "title": "Credit Cards Done Right", "description": "Free flights, cashback, and zero interest — if you play by the rules."},
+            {"id": "home-loan", "title": "Home Loan 101", "description": "30 years of EMIs. Is it an asset or a trap? Let's find out."},
+            {"id": "personal-loan", "title": "Personal Loans — When to Say No", "description": "Easy to get, hard to repay. The fine print nobody reads."},
+            {"id": "bnpl", "title": "BNPL — Buy Now, Cry Later?", "description": "Zomato Pay Later, LazyPay, Simpl — harmless convenience or a debt spiral?"},
+            {"id": "debt-management", "title": "Getting Out of Debt", "description": "Avalanche vs snowball methods, and why small expenses add up fast."},
         ],
     },
     {
-        "id": "taxes_saving",
+        "id": "taxes-saving",
         "title": "Taxes & Saving",
         "description": "80C, ITR basics, and legal tax-saving in India.",
-        "icon_name": "tax",
+        "icon_name": "taxes-saving",
         "difficulty_tags": ["beginner", "practical"],
         "sample_questions": [
             "What is 80C?",
@@ -116,18 +120,19 @@ TOPICS: list[dict[str, Any]] = [
             "How to save tax legally?",
         ],
         "sub_topics": [
-            {"id": "80c", "title": "80C", "description": "Deductions and limits."},
-            {"id": "itr_basics", "title": "ITR basics", "description": "Filing overview."},
-            {"id": "regimes", "title": "Old vs New regime", "description": "Trade-offs."},
-            {"id": "elss_vs_ppf", "title": "ELSS vs PPF", "description": "Lock-in, risk, return."},
-            {"id": "nps", "title": "NPS", "description": "Retirement + tax angle."},
+            {"id": "income-tax-slabs", "title": "Income Tax Slabs Explained", "description": "Old regime vs new regime — which one actually saves you more money?"},
+            {"id": "80c-deductions", "title": "80C — Your Tax-Saving Toolkit", "description": "PPF, ELSS, LIC, NPS — all the 80C options ranked honestly."},
+            {"id": "itr-filing", "title": "Filing ITR Without a CA", "description": "It's not as scary as it looks. We walk through every section."},
+            {"id": "gst-basics", "title": "GST — Why Everything Is 18%", "description": "Understanding GST so you stop being confused by your restaurant bill."},
+            {"id": "tax-saving-fd", "title": "Tax-Saving FDs & NSC", "description": "Low risk, locked in for 5 years. Good or just boring? Depends on your goals."},
+            {"id": "advance-tax", "title": "Advance Tax & TDS", "description": "Freelancers, this one's for you. Don't get surprised at year end."},
         ],
     },
     {
-        "id": "investing_101",
+        "id": "investing-101",
         "title": "Investing 101",
         "description": "Risk vs return, diversification, and starting early.",
-        "icon_name": "investing",
+        "icon_name": "investing-101",
         "difficulty_tags": ["beginner"],
         "sample_questions": [
             "What is diversification?",
@@ -137,11 +142,12 @@ TOPICS: list[dict[str, Any]] = [
             "How much risk should I take?",
         ],
         "sub_topics": [
-            {"id": "risk_return", "title": "Risk vs return", "description": "The core trade-off."},
-            {"id": "diversification", "title": "Diversification", "description": "Don’t bet the farm."},
-            {"id": "inflation", "title": "Inflation", "description": "Why cash loses value."},
-            {"id": "time_value", "title": "Start early", "description": "Compounding basics."},
-            {"id": "asset_classes", "title": "Asset classes", "description": "Equity, debt, gold, cash."},
+            {"id": "asset-classes", "title": "Assets: Equity, Debt, Gold, Real Estate", "description": "Four buckets where all money goes. Know each before you invest a rupee."},
+            {"id": "risk-return", "title": "Risk vs Return — The Eternal Tradeoff", "description": "Higher return = higher risk. Always. No exceptions. Period."},
+            {"id": "compounding", "title": "Compounding — The 8th Wonder", "description": "Einstein said it. Your bank doesn't want you to know it. We'll explain it."},
+            {"id": "diversification", "title": "Don't Put All Eggs in One Basket", "description": "Diversification is just a fancy word for 'spread your bets'."},
+            {"id": "inflation", "title": "Inflation — The Silent Wealth Killer", "description": "Your ₹100 today is worth ₹96 next year. Yes, really."},
+            {"id": "emergency-fund", "title": "Emergency Fund First, Invest Later", "description": "3–6 months of expenses in liquid cash. Non-negotiable."},
         ],
     },
 ]
@@ -174,7 +180,7 @@ def quiz_questions_for(topic_id: str) -> dict[str, Any]:
 
 
 def default_journey_for(topic_id: str) -> dict[str, Any]:
-    if topic_id == "mutual_funds":
+    if topic_id == "mutual-funds":
         steps = [
             {
                 "step_number": 1,

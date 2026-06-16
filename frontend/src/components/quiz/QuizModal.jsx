@@ -60,7 +60,24 @@ export default function QuizModal({ topic, onClose, onComplete }) {
     const fetch = async () => {
       try {
         const data = await quizAPI.getQuestions(topic.id);
-        setQuestions(data.questions || data || FALLBACK_QUESTIONS);
+        const rawQuestions = data.questions || data || [];
+        if (Array.isArray(rawQuestions) && rawQuestions.length > 0) {
+          const normalized = rawQuestions.map((q) => ({
+            id: q.question_id || q.id,
+            question: q.question_text || q.question,
+            options: Array.isArray(q.options)
+              ? q.options.map((opt) => {
+                  if (typeof opt === 'string') {
+                    return { id: opt, text: opt };
+                  }
+                  return opt;
+                })
+              : [],
+          }));
+          setQuestions(normalized);
+        } else {
+          setQuestions(FALLBACK_QUESTIONS);
+        }
       } catch {
         setQuestions(FALLBACK_QUESTIONS);
       } finally {
@@ -82,7 +99,11 @@ export default function QuizModal({ topic, onClose, onComplete }) {
     if (isLast) {
       setSubmitting(true);
       try {
-        const result = await quizAPI.submitAnswers(topic.id, answers);
+        const formattedAnswers = Object.entries(answers).map(([qId, optVal]) => ({
+          question_id: qId,
+          selected_options: [optVal],
+        }));
+        const result = await quizAPI.submitAnswers(topic.id, formattedAnswers);
         setDone(true);
         // Pass both recommended order AND the answers so Home can cache them
         setTimeout(() => onComplete(result?.recommended_subtopic_order || [], answers), 1400);

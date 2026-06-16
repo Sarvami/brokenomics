@@ -29,6 +29,7 @@ _mongodb_connected: bool = False
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     global _mongodb_connected
+    print("STARTUP: MONGODB_URL =", settings.MONGODB_URL)
     try:
         await connect_to_mongo()
         _mongodb_connected = True

@@ -9,7 +9,7 @@ from app.db import collections
 async def test_chat_message_happy_path(client, mock_db, monkeypatch):
     import app.api.v1.chat as chat_routes
 
-    await mock_db[collections.TOPICS].insert_one({"id": "mutual_funds", "title": "Mutual Funds", "sub_topics": []})
+    await mock_db[collections.TOPICS].insert_one({"id": "mutual-funds", "title": "Mutual Funds", "sub_topics": []})
 
     async def fake_send_message(*, user_id, session_id, user_message, system_prompt, chat_history):
         return {
@@ -26,7 +26,7 @@ async def test_chat_message_happy_path(client, mock_db, monkeypatch):
 
     res = await client.post(
         "/api/v1/chat/message",
-        json={"topic_id": "mutual_funds", "message": "Hi", "sub_topic_id": None, "session_id": None},
+        json={"topic_id": "mutual-funds", "message": "Hi", "sub_topic_id": None, "session_id": None},
     )
     assert res.status_code == 200
     body = res.json()
